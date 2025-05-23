@@ -374,12 +374,12 @@ Public Class Form1
     End Sub
 
     Private Sub logout_btn_Click(sender As Object, e As EventArgs) Handles logout_btn.Click
+        logout_btn.ForeColor = Color.Red
         ' Confirm logout action with a dialog box
         Dim result As DialogResult = MessageBox.Show("Are you sure you want to logout?",
                                                  "Confirm Logout",
                                                  MessageBoxButtons.YesNo,
                                                  MessageBoxIcon.Question)
-
         If result = DialogResult.Yes Then
             Me.Hide()
             ' Create an instance of LoginPage
@@ -391,5 +391,15 @@ Public Class Form1
             ' Hide the current form (Form1)
             Me.Close()
         End If
+
+
+    End Sub
+
+    Private Sub logout_btn_MouseHover(sender As Object, e As EventArgs) Handles logout_btn.MouseHover
+        logout_btn.ForeColor = Color.Red
+    End Sub
+
+    Private Sub logout_btn_MouseLeave(sender As Object, e As EventArgs) Handles logout_btn.MouseLeave
+        logout_btn.ForeColor = SystemColors.ControlText
     End Sub
 End Class

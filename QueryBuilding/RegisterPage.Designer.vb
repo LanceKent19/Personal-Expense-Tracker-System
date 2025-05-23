@@ -48,7 +48,7 @@ Partial Class RegisterPage
         username_tb.Location = New Point(101, 69)
         username_tb.Name = "username_tb"
         username_tb.Size = New Size(210, 22)
-        username_tb.TabIndex = 9
+        username_tb.TabIndex = 1
         ' 
         ' clear_btn
         ' 
@@ -57,7 +57,7 @@ Partial Class RegisterPage
         clear_btn.Location = New Point(224, 231)
         clear_btn.Name = "clear_btn"
         clear_btn.Size = New Size(87, 43)
-        clear_btn.TabIndex = 15
+        clear_btn.TabIndex = 5
         clear_btn.Text = "Clear"
         clear_btn.UseVisualStyleBackColor = True
         ' 
@@ -68,7 +68,7 @@ Partial Class RegisterPage
         register_btn.Location = New Point(101, 231)
         register_btn.Name = "register_btn"
         register_btn.Size = New Size(87, 43)
-        register_btn.TabIndex = 11
+        register_btn.TabIndex = 4
         register_btn.Text = "Register"
         register_btn.UseVisualStyleBackColor = True
         ' 
@@ -88,7 +88,7 @@ Partial Class RegisterPage
         password_tb.Name = "password_tb"
         password_tb.PasswordChar = "*"c
         password_tb.Size = New Size(211, 22)
-        password_tb.TabIndex = 14
+        password_tb.TabIndex = 2
         ' 
         ' confirmpass_tb
         ' 
@@ -97,7 +97,7 @@ Partial Class RegisterPage
         confirmpass_tb.Name = "confirmpass_tb"
         confirmpass_tb.PasswordChar = "*"c
         confirmpass_tb.Size = New Size(210, 22)
-        confirmpass_tb.TabIndex = 17
+        confirmpass_tb.TabIndex = 3
         ' 
         ' Label3
         ' 

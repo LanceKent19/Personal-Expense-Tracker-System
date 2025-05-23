@@ -1,4 +1,7 @@
 ﻿Imports MySql.Data.MySqlClient
+Imports System.Security.Cryptography
+Imports System.Text
+
 
 Public Class RegisterPage
     Private connString As String = "Server=localhost;Database=expensetracker_db;User ID=root;Password=;"
@@ -12,6 +15,17 @@ Public Class RegisterPage
         password_tb.Text = ""
         confirmpass_tb.Text = ""
     End Sub
+    Private Function HashPassword(password As String) As String
+        Using sha256 As SHA256 = SHA256.Create()
+            Dim bytes As Byte() = Encoding.UTF8.GetBytes(password)
+            Dim hash As Byte() = sha256.ComputeHash(bytes)
+            Dim sb As New StringBuilder()
+            For Each b As Byte In hash
+                sb.Append(b.ToString("x2"))
+            Next
+            Return sb.ToString()
+        End Using
+    End Function
 
     Private Sub register_btn_Click(sender As Object, e As EventArgs) Handles register_btn.Click
         ' Validate passwords match
@@ -36,11 +50,14 @@ Public Class RegisterPage
                     End If
                 End Using
 
+                ' Hash the password before storing
+                Dim hashedPassword As String = HashPassword(password_tb.Text)
+
                 ' Insert new user
                 Dim query As String = "INSERT INTO user_tb (username, password) VALUES (@Username, @Password)"
                 Using cmd As New MySqlCommand(query, conn)
                     cmd.Parameters.AddWithValue("@Username", username_tb.Text)
-                    cmd.Parameters.AddWithValue("@Password", password_tb.Text)
+                    cmd.Parameters.AddWithValue("@Password", hashedPassword)
                     Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
                     If rowsAffected > 0 Then

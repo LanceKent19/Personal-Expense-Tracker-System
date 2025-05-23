@@ -58,7 +58,7 @@ Partial Class LoginPage
         showpass_btn.Location = New Point(66, 179)
         showpass_btn.Name = "showpass_btn"
         showpass_btn.Size = New Size(127, 18)
-        showpass_btn.TabIndex = 2
+        showpass_btn.TabIndex = 3
         showpass_btn.Text = "Show Password"
         showpass_btn.UseVisualStyleBackColor = True
         ' 
@@ -69,7 +69,7 @@ Partial Class LoginPage
         login_btn.Location = New Point(66, 217)
         login_btn.Name = "login_btn"
         login_btn.Size = New Size(87, 43)
-        login_btn.TabIndex = 3
+        login_btn.TabIndex = 5
         login_btn.Text = "Login"
         login_btn.UseVisualStyleBackColor = True
         ' 
@@ -101,7 +101,7 @@ Partial Class LoginPage
         password_tb.Name = "password_tb"
         password_tb.PasswordChar = "*"c
         password_tb.Size = New Size(270, 22)
-        password_tb.TabIndex = 6
+        password_tb.TabIndex = 2
         ' 
         ' clear_btn
         ' 
@@ -110,17 +110,17 @@ Partial Class LoginPage
         clear_btn.Location = New Point(249, 217)
         clear_btn.Name = "clear_btn"
         clear_btn.Size = New Size(87, 43)
-        clear_btn.TabIndex = 7
+        clear_btn.TabIndex = 6
         clear_btn.Text = "Clear"
         clear_btn.UseVisualStyleBackColor = True
         ' 
         ' LoginPage
         ' 
-        AutoScaleDimensions = New SizeF(8F, 14F)
+        AutoScaleDimensions = New SizeF(8.0F, 14.0F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(403, 290)
-        Controls.Add(clear_btn)
         Controls.Add(password_tb)
+        Controls.Add(clear_btn)
         Controls.Add(Label2)
         Controls.Add(register_link)
         Controls.Add(login_btn)

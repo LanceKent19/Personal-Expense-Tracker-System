@@ -378,15 +378,19 @@ Partial Class Form1
         ' 
         ' logout_btn
         ' 
-        logout_btn.BackColor = Color.White
-        logout_btn.BackgroundImage = My.Resources.Resources.logout
-        logout_btn.BackgroundImageLayout = ImageLayout.Zoom
+        logout_btn.BackColor = Color.Transparent
+        logout_btn.BackgroundImageLayout = ImageLayout.None
         logout_btn.Cursor = Cursors.Hand
-        logout_btn.Location = New Point(879, -1)
-        logout_btn.Margin = New Padding(4, 3, 4, 3)
+        logout_btn.FlatAppearance.BorderColor = Color.White
+        logout_btn.FlatAppearance.BorderSize = 0
+        logout_btn.FlatAppearance.MouseDownBackColor = Color.Transparent
+        logout_btn.FlatAppearance.MouseOverBackColor = Color.Transparent
+        logout_btn.FlatStyle = FlatStyle.Flat
+        logout_btn.Location = New Point(722, -1)
         logout_btn.Name = "logout_btn"
-        logout_btn.Size = New Size(40, 40)
-        logout_btn.TabIndex = 29
+        logout_btn.Size = New Size(197, 28)
+        logout_btn.TabIndex = 30
+        logout_btn.Text = "Hi, Username"
         logout_btn.UseVisualStyleBackColor = False
         ' 
         ' Form1
@@ -394,6 +398,7 @@ Partial Class Form1
         AutoScaleDimensions = New SizeF(8F, 16F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.White
+        BackgroundImageLayout = ImageLayout.None
         ClientSize = New Size(918, 557)
         Controls.Add(logout_btn)
         Controls.Add(summary_btn)
@@ -457,6 +462,7 @@ Partial Class Form1
     Friend WithEvents Label9 As Label
     Friend WithEvents category_cb As ComboBox
     Friend WithEvents summary_btn As Button
+    Friend WithEvents Button1 As Button
     Friend WithEvents logout_btn As Button
 
 End Class

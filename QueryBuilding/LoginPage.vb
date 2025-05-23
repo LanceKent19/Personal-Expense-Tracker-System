@@ -1,4 +1,6 @@
 ﻿Imports MySql.Data.MySqlClient
+Imports System.Security.Cryptography
+Imports System.Text
 
 Public Class LoginPage
     Private Sub login_btn_Click(sender As Object, e As EventArgs) Handles login_btn.Click
@@ -9,7 +11,9 @@ Public Class LoginPage
                 ' Check username and password
                 Using cmd As New MySqlCommand("SELECT username FROM user_tb WHERE username=@Username AND password=@Password", conn)
                     cmd.Parameters.AddWithValue("@Username", username_tb.Text)
-                    cmd.Parameters.AddWithValue("@Password", password_tb.Text)
+
+                    Dim hashedPassword As String = HashPassword(password_tb.Text)
+                    cmd.Parameters.AddWithValue("@Password", hashedPassword)
 
                     Dim result = cmd.ExecuteScalar()
                     If result IsNot Nothing Then
@@ -28,7 +32,17 @@ Public Class LoginPage
             MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
+    Private Function HashPassword(password As String) As String
+        Using sha256 As SHA256 = SHA256.Create()
+            Dim bytes As Byte() = Encoding.UTF8.GetBytes(password)
+            Dim hash As Byte() = sha256.ComputeHash(bytes)
+            Dim sb As New StringBuilder()
+            For Each b As Byte In hash
+                sb.Append(b.ToString("x2"))
+            Next
+            Return sb.ToString()
+        End Using
+    End Function
     Private Sub clear_btn_Click(sender As Object, e As EventArgs) Handles clear_btn.Click
         username_tb.Text = ""
         password_tb.Text = ""

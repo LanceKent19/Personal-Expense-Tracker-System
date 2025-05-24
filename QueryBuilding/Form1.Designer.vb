@@ -24,11 +24,6 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         DataGridView1 = New DataGridView()
-        Column1 = New DataGridViewTextBoxColumn()
-        Column2 = New DataGridViewTextBoxColumn()
-        Column3 = New DataGridViewTextBoxColumn()
-        Column4 = New DataGridViewTextBoxColumn()
-        Column5 = New DataGridViewTextBoxColumn()
         save_btn = New Button()
         update_btn = New Button()
         delete_btn = New Button()
@@ -54,7 +49,11 @@ Partial Class Form1
         Label8 = New Label()
         Label9 = New Label()
         summary_btn = New Button()
-        logout_btn = New Button()
+        logoutLinkLabel = New LinkLabel()
+        Column2 = New DataGridViewTextBoxColumn()
+        Column3 = New DataGridViewTextBoxColumn()
+        Column4 = New DataGridViewTextBoxColumn()
+        Column5 = New DataGridViewTextBoxColumn()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
         SuspendLayout()
@@ -66,7 +65,7 @@ Partial Class Form1
         DataGridView1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         DataGridView1.BackgroundColor = Color.White
         DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Columns.AddRange(New DataGridViewColumn() {Column1, Column2, Column3, Column4, Column5})
+        DataGridView1.Columns.AddRange(New DataGridViewColumn() {Column2, Column3, Column4, Column5})
         DataGridView1.Location = New Point(77, 148)
         DataGridView1.Margin = New Padding(4, 3, 4, 3)
         DataGridView1.Name = "DataGridView1"
@@ -74,41 +73,7 @@ Partial Class Form1
         DataGridView1.RowHeadersVisible = False
         DataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         DataGridView1.Size = New Size(757, 277)
-        DataGridView1.TabIndex = 0
-        ' 
-        ' Column1
-        ' 
-        Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        Column1.HeaderText = "Expense ID"
-        Column1.Name = "Column1"
-        Column1.ReadOnly = True
-        ' 
-        ' Column2
-        ' 
-        Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        Column2.HeaderText = "Category"
-        Column2.Name = "Column2"
-        Column2.ReadOnly = True
-        ' 
-        ' Column3
-        ' 
-        Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        Column3.HeaderText = "Description"
-        Column3.Name = "Column3"
-        Column3.ReadOnly = True
-        ' 
-        ' Column4
-        ' 
-        Column4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        Column4.HeaderText = "Date"
-        Column4.Name = "Column4"
-        Column4.ReadOnly = True
-        ' 
-        ' Column5
-        ' 
-        Column5.HeaderText = "Amount"
-        Column5.Name = "Column5"
-        Column5.ReadOnly = True
+        DataGridView1.TabIndex = 14
         ' 
         ' save_btn
         ' 
@@ -118,7 +83,7 @@ Partial Class Form1
         save_btn.Margin = New Padding(4, 3, 4, 3)
         save_btn.Name = "save_btn"
         save_btn.Size = New Size(65, 28)
-        save_btn.TabIndex = 1
+        save_btn.TabIndex = 7
         save_btn.Text = "Save"
         save_btn.UseVisualStyleBackColor = False
         ' 
@@ -130,7 +95,7 @@ Partial Class Form1
         update_btn.Margin = New Padding(4, 3, 4, 3)
         update_btn.Name = "update_btn"
         update_btn.Size = New Size(65, 28)
-        update_btn.TabIndex = 2
+        update_btn.TabIndex = 8
         update_btn.Text = "Update"
         update_btn.UseVisualStyleBackColor = False
         ' 
@@ -142,7 +107,7 @@ Partial Class Form1
         delete_btn.Margin = New Padding(4, 3, 4, 3)
         delete_btn.Name = "delete_btn"
         delete_btn.Size = New Size(65, 28)
-        delete_btn.TabIndex = 5
+        delete_btn.TabIndex = 9
         delete_btn.Text = "Delete"
         delete_btn.UseVisualStyleBackColor = False
         ' 
@@ -154,7 +119,7 @@ Partial Class Form1
         clear_btn.Margin = New Padding(4, 3, 4, 3)
         clear_btn.Name = "clear_btn"
         clear_btn.Size = New Size(65, 28)
-        clear_btn.TabIndex = 6
+        clear_btn.TabIndex = 10
         clear_btn.Text = "Clear"
         clear_btn.UseVisualStyleBackColor = False
         ' 
@@ -164,7 +129,7 @@ Partial Class Form1
         description_txt.Location = New Point(373, 48)
         description_txt.Name = "description_txt"
         description_txt.Size = New Size(164, 23)
-        description_txt.TabIndex = 8
+        description_txt.TabIndex = 3
         ' 
         ' Label1
         ' 
@@ -201,7 +166,7 @@ Partial Class Form1
         amount_txt.Location = New Point(742, 47)
         amount_txt.Name = "amount_txt"
         amount_txt.Size = New Size(164, 23)
-        amount_txt.TabIndex = 16
+        amount_txt.TabIndex = 5
         ' 
         ' txt_search
         ' 
@@ -210,7 +175,7 @@ Partial Class Form1
         txt_search.Name = "txt_search"
         txt_search.PlaceholderText = "Search Here...."
         txt_search.Size = New Size(282, 23)
-        txt_search.TabIndex = 17
+        txt_search.TabIndex = 11
         ' 
         ' GroupBox1
         ' 
@@ -240,7 +205,7 @@ Partial Class Form1
         category_cb.Location = New Point(185, 48)
         category_cb.Name = "category_cb"
         category_cb.Size = New Size(163, 22)
-        category_cb.TabIndex = 21
+        category_cb.TabIndex = 2
         category_cb.Text = "SELECT CATEGORY"
         ' 
         ' Label6
@@ -260,7 +225,7 @@ Partial Class Form1
         date_picker.Location = New Point(573, 49)
         date_picker.Name = "date_picker"
         date_picker.Size = New Size(115, 22)
-        date_picker.TabIndex = 19
+        date_picker.TabIndex = 4
         date_picker.Value = New Date(2024, 12, 13, 9, 19, 25, 0)
         ' 
         ' expenseid_txt
@@ -268,7 +233,7 @@ Partial Class Form1
         expenseid_txt.Location = New Point(6, 47)
         expenseid_txt.Name = "expenseid_txt"
         expenseid_txt.Size = New Size(164, 23)
-        expenseid_txt.TabIndex = 17
+        expenseid_txt.TabIndex = 1
         ' 
         ' Label4
         ' 
@@ -288,7 +253,7 @@ Partial Class Form1
         add_btn.Margin = New Padding(4, 3, 4, 3)
         add_btn.Name = "add_btn"
         add_btn.Size = New Size(65, 28)
-        add_btn.TabIndex = 20
+        add_btn.TabIndex = 6
         add_btn.Text = "New"
         add_btn.UseVisualStyleBackColor = False
         ' 
@@ -327,24 +292,27 @@ Partial Class Form1
         ' 
         ' datepicker_from
         ' 
+        datepicker_from.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         datepicker_from.Font = New Font("Verdana", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         datepicker_from.Format = DateTimePickerFormat.Short
         datepicker_from.Location = New Point(500, 117)
         datepicker_from.Name = "datepicker_from"
         datepicker_from.Size = New Size(110, 22)
-        datepicker_from.TabIndex = 24
+        datepicker_from.TabIndex = 12
         ' 
         ' datepicker_to
         ' 
+        datepicker_to.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         datepicker_to.Font = New Font("Verdana", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         datepicker_to.Format = DateTimePickerFormat.Short
         datepicker_to.Location = New Point(706, 117)
         datepicker_to.Name = "datepicker_to"
         datepicker_to.Size = New Size(128, 22)
-        datepicker_to.TabIndex = 25
+        datepicker_to.TabIndex = 13
         ' 
         ' Label8
         ' 
+        Label8.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         Label8.AutoSize = True
         Label8.Font = New Font("Verdana", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label8.Location = New Point(456, 123)
@@ -355,6 +323,7 @@ Partial Class Form1
         ' 
         ' Label9
         ' 
+        Label9.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         Label9.AutoSize = True
         Label9.Font = New Font("Verdana", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label9.Location = New Point(679, 123)
@@ -372,26 +341,48 @@ Partial Class Form1
         summary_btn.Margin = New Padding(4, 3, 4, 3)
         summary_btn.Name = "summary_btn"
         summary_btn.Size = New Size(131, 28)
-        summary_btn.TabIndex = 28
+        summary_btn.TabIndex = 16
         summary_btn.Text = "Summary Report"
         summary_btn.UseVisualStyleBackColor = False
         ' 
-        ' logout_btn
+        ' logoutLinkLabel
         ' 
-        logout_btn.BackColor = Color.Transparent
-        logout_btn.BackgroundImageLayout = ImageLayout.None
-        logout_btn.Cursor = Cursors.Hand
-        logout_btn.FlatAppearance.BorderColor = Color.White
-        logout_btn.FlatAppearance.BorderSize = 0
-        logout_btn.FlatAppearance.MouseDownBackColor = Color.Transparent
-        logout_btn.FlatAppearance.MouseOverBackColor = Color.Transparent
-        logout_btn.FlatStyle = FlatStyle.Flat
-        logout_btn.Location = New Point(722, -1)
-        logout_btn.Name = "logout_btn"
-        logout_btn.Size = New Size(197, 28)
-        logout_btn.TabIndex = 30
-        logout_btn.Text = "Hi, Username"
-        logout_btn.UseVisualStyleBackColor = False
+        logoutLinkLabel.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        logoutLinkLabel.ImageAlign = ContentAlignment.MiddleLeft
+        logoutLinkLabel.Location = New Point(540, 2)
+        logoutLinkLabel.Name = "logoutLinkLabel"
+        logoutLinkLabel.Size = New Size(374, 16)
+        logoutLinkLabel.TabIndex = 28
+        logoutLinkLabel.TabStop = True
+        logoutLinkLabel.Text = "Logged in as: Username"
+        logoutLinkLabel.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Column2
+        ' 
+        Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        Column2.HeaderText = "Category"
+        Column2.Name = "Column2"
+        Column2.ReadOnly = True
+        ' 
+        ' Column3
+        ' 
+        Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        Column3.HeaderText = "Description"
+        Column3.Name = "Column3"
+        Column3.ReadOnly = True
+        ' 
+        ' Column4
+        ' 
+        Column4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        Column4.HeaderText = "Date"
+        Column4.Name = "Column4"
+        Column4.ReadOnly = True
+        ' 
+        ' Column5
+        ' 
+        Column5.HeaderText = "Amount"
+        Column5.Name = "Column5"
+        Column5.ReadOnly = True
         ' 
         ' Form1
         ' 
@@ -400,7 +391,7 @@ Partial Class Form1
         BackColor = Color.White
         BackgroundImageLayout = ImageLayout.None
         ClientSize = New Size(918, 557)
-        Controls.Add(logout_btn)
+        Controls.Add(logoutLinkLabel)
         Controls.Add(summary_btn)
         Controls.Add(Label9)
         Controls.Add(Label8)
@@ -447,11 +438,6 @@ Partial Class Form1
     Friend WithEvents Label4 As Label
     Friend WithEvents add_btn As Button
     Friend WithEvents Label5 As Label
-    Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As DataGridViewTextBoxColumn
     Friend WithEvents date_picker As DateTimePicker
     Friend WithEvents Label6 As Label
     Friend WithEvents Label7 As Label
@@ -463,6 +449,10 @@ Partial Class Form1
     Friend WithEvents category_cb As ComboBox
     Friend WithEvents summary_btn As Button
     Friend WithEvents Button1 As Button
-    Friend WithEvents logout_btn As Button
+    Friend WithEvents logoutLinkLabel As LinkLabel
+    Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As DataGridViewTextBoxColumn
+    Friend WithEvents Column4 As DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As DataGridViewTextBoxColumn
 
 End Class

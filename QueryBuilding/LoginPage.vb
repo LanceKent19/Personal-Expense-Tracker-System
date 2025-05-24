@@ -9,23 +9,27 @@ Public Class LoginPage
                 conn.Open()
 
                 ' Check username and password
-                Using cmd As New MySqlCommand("SELECT username FROM user_tb WHERE username=@Username AND password=@Password", conn)
+                Using cmd As New MySqlCommand("SELECT user_id, username FROM user_tb WHERE username=@Username AND password=@Password", conn)
                     cmd.Parameters.AddWithValue("@Username", username_tb.Text)
 
                     Dim hashedPassword As String = HashPassword(password_tb.Text)
                     cmd.Parameters.AddWithValue("@Password", hashedPassword)
 
-                    Dim result = cmd.ExecuteScalar()
-                    If result IsNot Nothing Then
-                        MessageBox.Show($"Welcome, {result}!!!", "Login Successful", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        Me.Hide()
-                        Dim mainForm As New Form1
-                        mainForm.ShowDialog()
-                        Me.Close() ' Close login form after main form is close
+                    Using reader = cmd.ExecuteReader
+                        If reader.Read Then
+                            loggedUserId = reader.GetInt32("user_id")
+                            loggedInUsername = reader.GetString("username")
 
-                    Else
-                        MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    End If
+                            MessageBox.Show($"Welcome, {loggedInUsername}!!!", "Login Successful", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            Me.Hide()
+                            Dim mainForm As New Form1
+                            mainForm.ShowDialog()
+                            Me.Close() ' Close login form after main form is close
+
+                        Else
+                            MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End If
+                    End Using
                 End Using
             End Using
         Catch ex As Exception

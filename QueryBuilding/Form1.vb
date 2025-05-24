@@ -12,7 +12,10 @@ Public Class Form1
         LoadData()
         ToggleControls(False, False, False)
         expenseid_txt.ReadOnly = True
-
+        logoutLinkLabel.Text = "▾ Logged in as: " + loggedInUsername
+        logoutLinkLabel.Links.Clear()
+        logoutLinkLabel.Links.Add("▾ Logged in as: ".Length, loggedInUsername.Length)
+        logoutLinkLabel.LinkColor = SystemColors.ControlText
     End Sub
 
     ' Load Categories from category_tb into ComboBox
@@ -42,10 +45,11 @@ Public Class Form1
         Try
             Using conn As New MySqlConnection(connString)
                 conn.Open()
-                Using cmd As New MySqlCommand("SELECT * FROM expense_tb", conn)
+                Using cmd As New MySqlCommand("SELECT * FROM expense_tb WHERE user_id=@User_Id", conn)
+                    cmd.Parameters.AddWithValue("@User_Id", loggedUserId)
                     Using dr = cmd.ExecuteReader()
                         While dr.Read()
-                            DataGridView1.Rows.Add(dr("expense_id"), dr("category"), dr("description"),
+                            DataGridView1.Rows.Add(dr("category"), dr("description"),
                                                CDate(dr("date")).ToString("yyyy-MM-dd"), dr("amount"))
                         End While
                     End Using
@@ -67,7 +71,7 @@ Public Class Form1
         ' Use column index 4 for the "amount" column
         For Each row As DataGridViewRow In DataGridView1.Rows
             If Not row.IsNewRow Then
-                total += Convert.ToDecimal(row.Cells(4).Value)
+                total += Convert.ToDecimal(row.Cells(3).Value)
             End If
         Next
 
@@ -80,7 +84,7 @@ Public Class Form1
         Try
             Using conn As New MySqlConnection(connString)
                 conn.Open()
-                Using cmd As New MySqlCommand("INSERT INTO expense_tb (category, description, date, amount) VALUES (@Category, @Description, @Date, @Amount)", conn)
+                Using cmd As New MySqlCommand("INSERT INTO expense_tb (user_id,category, description, date, amount) VALUES (@User_Id,@Category, @Description, @Date, @Amount)", conn)
                     AddParameters(cmd)
                     i = cmd.ExecuteNonQuery()
                     ShowMessage(i, "Record Saved Successfully!", "Record Save Failed!")
@@ -161,6 +165,7 @@ Public Class Form1
     End Sub
 
     Private Sub AddParameters(cmd As MySqlCommand)
+        cmd.Parameters.AddWithValue("@User_Id", loggedUserId.ToString)
         cmd.Parameters.AddWithValue("@ExpenseId", expenseid_txt.Text)
         cmd.Parameters.AddWithValue("@Category", category_cb.Text)
         cmd.Parameters.AddWithValue("@Description", description_txt.Text)
@@ -372,9 +377,7 @@ Public Class Form1
             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
-    Private Sub logout_btn_Click(sender As Object, e As EventArgs) Handles logout_btn.Click
-        logout_btn.ForeColor = Color.Red
+    Private Sub logoutLinkLabel_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles logoutLinkLabel.LinkClicked
         ' Confirm logout action with a dialog box
         Dim result As DialogResult = MessageBox.Show("Are you sure you want to logout?",
                                                  "Confirm Logout",
@@ -392,14 +395,6 @@ Public Class Form1
             Me.Close()
         End If
 
-
     End Sub
 
-    Private Sub logout_btn_MouseHover(sender As Object, e As EventArgs) Handles logout_btn.MouseHover
-        logout_btn.ForeColor = Color.Red
-    End Sub
-
-    Private Sub logout_btn_MouseLeave(sender As Object, e As EventArgs) Handles logout_btn.MouseLeave
-        logout_btn.ForeColor = SystemColors.ControlText
-    End Sub
 End Class
